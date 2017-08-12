@@ -74,6 +74,33 @@ readMagazine = (ransom, magazine) => {
       }
   }
 }
+
+//Opción 3 Map
+readMagazine = (ransom, magazine) => {
+  let map = new Map();
+  var magazine = magazine.split(' ');
+  var ransom = ransom.split(' ');
+
+  for(let i = 0; i < magazine.length; i++){
+      if(!map.has(magazine[i])){
+          map.set(magazine[i], 1);
+      }else{
+          map.set(magazine[i], map.get(magazine[i]+1));
+      }
+  }
+  //Format result
+  for(let i = 0; i < ransom.length; i++){
+      if(!map.has(ransom[i]) || map.get(ransom[i]) <= 0){
+        console.log("No");
+        break;
+      }
+      map.set(ransom[i], map.get(ransom[i])-1);
+      if(i === ransom.length-1){
+          console.log("Yes");
+      }
+  }
+  }
+
   let str1 = "give me one grand today night";
   let str2 = "give one grand today";
   readMagazine(str2, str1);
