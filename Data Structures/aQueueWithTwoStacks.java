@@ -20,6 +20,8 @@ where each query is one of the following  types:
 3: Print the element at the front of the queue.
 */
 
+//Best option
+
 import java.io.*;
 import java.util.*;
 import java.text.*;
@@ -41,12 +43,76 @@ public class Solution {
         }
 
         public T dequeue() {
+            /*Si tiene mas de un elemento nuestro stack s2, podemos
+            retornar el primero que es el tope*/
             if(s2.size() > 1) return s2.pop();
+            /*De lo contrario significa que tenemos solo un elemento
+            entonces lo sacamos de la pila y insertamos todo de s1 a s2
+            al hacer esta operacion el primer elemento agregado al stack s1
+            estara en la cima del stack 2 y asi podemos retornarlo con un
+            pop o si queremos consultarlo con un peek, en s2 tendremos en el
+            tope del stack a los primeros elementos agregados*/
             T current = s2.pop();
             while(!s1.isEmpty()){
                 s2.push(s1.pop());
             }
             return current;
+        }
+    }
+
+    
+    public static void main(String[] args) {
+        MyQueue<Integer> queue = new MyQueue<Integer>();
+        
+        Scanner scan = new Scanner(System.in);
+        int n = scan.nextInt();
+        
+        for (int i = 0; i < n; i++) {
+            int operation = scan.nextInt();
+            if (operation == 1) { // enqueue
+                queue.enqueue(scan.nextInt());
+            } else if (operation == 2) { // dequeue
+                queue.dequeue();
+            } else if (operation == 3) { // print/peek
+                System.out.println(queue.peek());
+            }
+        }
+        scan.close();
+    }
+}
+
+
+
+//Alternative, not very good performance
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    public static class MyQueue<T> {
+        Stack<T> s1 = new Stack<T>();
+        Stack<T> s2 = new Stack<T>();
+
+        public void enqueue(T value) { // Push onto newest stack
+            //if(s1.isEmpty()) s1.push(value);
+            while(!s1.isEmpty()){
+                s2.push(s1.pop());
+            }
+            s2.push(value);
+            while(!s2.isEmpty()){
+                s1.push(s2.pop());
+            }
+        }
+
+        public T peek() {
+             return s1.peek();
+        }
+
+        public T dequeue() {
+            return s1.pop();
         }
     }
 
