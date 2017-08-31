@@ -75,6 +75,8 @@ function main(array) {
   */ 
   function add(s){
       //Node is the object we declare of the beginning
+      /*Usamos node para no perder la referencia completa
+      al árbol*/
       var node = trie;
       for (var i = 0; i < s.length; i++) {
           /*Si ya tenemos el trie definido, asignamos ese, de lo contrario
@@ -89,6 +91,8 @@ function main(array) {
     
   function count(s){
       var node = trie;
+      /*Usamos node para no perder la referencia completa
+      al árbol*/
       /*Recorremos el string*/
       for (var i = 0; i < s.length; i++) {
         /*Si no encontramos el caracter significa
