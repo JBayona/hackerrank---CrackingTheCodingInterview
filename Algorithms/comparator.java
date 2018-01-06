@@ -1,4 +1,5 @@
 /*
+
 Comparators are used to compare two objects. In this challenge, you'll create a comparator and use it 
 to sort an array. The Player class is provided in the editor below; it has two fields:
 
@@ -44,6 +45,7 @@ Explanation
 As you can see, the players are first sorted by decreasing score and then sorted alphabetically by name.
 
 https://www.hackerrank.com/challenges/ctci-comparator-sorting
+
 */
 
 class Checker implements Comparator<Player>{
