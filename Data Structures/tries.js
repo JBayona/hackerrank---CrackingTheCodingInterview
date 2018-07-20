@@ -46,5 +46,48 @@ function main(commands){
     console.log(trie);
 }
 
-commands = ['add hack', 'add hackerrank'];
+//Opción 2
+
+function main(commands) {
+    
+  var trie = {count:0,children:{}};
+  
+  var n = commands.length;
+  for(var i = 0; i < n; i++){
+    var op_temp = commands[i].split(' ');
+    var op = op_temp[0];
+    var contact = op_temp[1];
+    
+    if(op=='add'){
+        add(contact);
+    }else{
+        console.log(count(contact));
+    }
+
+    //See trie
+    console.log(trie);
+  }
+  
+  function add(s){
+    var node = trie;
+    for (var i = 0; i < s.length; i++) {
+      node.children[s[i]] = node.children[s[i]] || {count:0,children:{}};
+      node = node.children[s[i]];
+      node.count++;
+    };
+  }
+  
+  function count(s){
+    var node = trie;
+    for (var i = 0; i < s.length; i++) {
+      if (!node.children[s[i]]) {
+          return 0;
+      }
+      node = node.children[s[i]];
+    };
+    return node.count
+  }
+}
+
+commands = ['add hack', 'add hackerrank', 'find hac', 'find hak'];
 console.log(main(commands));
